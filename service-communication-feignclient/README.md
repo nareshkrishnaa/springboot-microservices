@@ -1,4 +1,4 @@
-# Microservices Example: Employee Service + Address Service
+# Inter service communication using Feign Client: Employee Service + Address Service
 
 A simple **Spring Boot Microservices** demonstration showcasing inter-service communication using **Feign Client**.
 
