@@ -46,4 +46,15 @@ public class EmployeeResponse {
     public void setAge(String age) {
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        return "EmployeeResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age='" + age + '\'' +
+                ", addressResponse=" + addressResponse +
+                '}';
+    }
 }
