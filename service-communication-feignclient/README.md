@@ -47,4 +47,5 @@ GET http://localhost:8080/employee-service/employees/{id}
 
 ### Block Diagram
 
-![Feign Client Architecture](https://github.com/user-attachments/assets/531444c4-3e12-4289-8d3d-bcdd62454676)
+<img width="801" height="881" alt="feign client " src="https://github.com/user-attachments/assets/bb2d8afd-b82a-46ab-b2e7-9b91c34f5196" />
+
