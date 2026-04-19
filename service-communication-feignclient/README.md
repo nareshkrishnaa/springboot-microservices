@@ -45,3 +45,4 @@ The services communicate **via REST API** (not direct database join) to follow m
 ### Employee Service (Public API)
 ```http
 GET http://localhost:8080/employee-service/employees/{id}
+```
