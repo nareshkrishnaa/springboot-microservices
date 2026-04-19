@@ -58,11 +58,6 @@ GET http://localhost:8080/employee-service/employees/{id}
 ```
 ### address-service
 ```log
-22:58:36 PM INFO  [address-service] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/address-service'
-22:58:36 PM INFO  [address-service] d.l.a.AddressServiceApplication - Started AddressServiceApplication in 3.064 seconds (process running for 3.809)
-22:58:42 PM INFO  [address-service] o.a.c.c.C.[.[.[/address-service] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-22:58:42 PM INFO  [address-service] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-22:58:42 PM INFO  [address-service] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
 22:58:42 PM INFO  [address-service] d.l.a.controller.AddressController - 'AddressController API called': http://localhost:8081/address-service/address/1
 22:58:42 PM INFO  [address-service] d.l.a.controller.AddressController - Requesting AddressService.findAddressByEmployeeId(1)
 22:58:42 PM INFO  [address-service] d.l.a.service.AddressService - Getting Address Details from AddressRepo
