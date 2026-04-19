@@ -46,3 +46,36 @@ The services communicate **via REST API** (not direct database join) to follow m
 ```http
 GET http://localhost:8080/employee-service/employees/{id}
 ```
+## Logs 
+### employee-service 
+```log
+22:58:42 PM INFO  [employee-service] d.l.e.controller.EmployeeController - EmployeeController API called: http://localhost:8080/employee-service/employees/1
+22:58:42 PM INFO  [employee-service] d.l.e.controller.EmployeeController - Calling EmployeeService.getEmployeeById() with id=1
+22:58:42 PM INFO  [employee-service] d.l.e.service.EmployeeService - Getting Employee Details from EmployeeRepository
+22:58:42 PM INFO  [employee-service] d.l.e.service.EmployeeService - Recieved Employee Details from EmployeeRepository : EmployeeResponse{id=1, name='Amiya', email='amiya@email.com', age='25', addressResponse=null}
+22:58:42 PM INFO  [employee-service] d.l.e.service.EmployeeService - Requesting address-service for employee address details using Feign Client
+22:58:42 PM DEBUG [employee-service] d.l.e.client.AddressClient - [AddressClient#getAddressByEmployeeId] ---> GET http://localhost:8081/address-service/address/1 HTTP/1.1
+```
+### address-service
+```log
+22:58:36 PM INFO  [address-service] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/address-service'
+22:58:36 PM INFO  [address-service] d.l.a.AddressServiceApplication - Started AddressServiceApplication in 3.064 seconds (process running for 3.809)
+22:58:42 PM INFO  [address-service] o.a.c.c.C.[.[.[/address-service] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+22:58:42 PM INFO  [address-service] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+22:58:42 PM INFO  [address-service] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+22:58:42 PM INFO  [address-service] d.l.a.controller.AddressController - 'AddressController API called': http://localhost:8081/address-service/address/1
+22:58:42 PM INFO  [address-service] d.l.a.controller.AddressController - Requesting AddressService.findAddressByEmployeeId(1)
+22:58:42 PM INFO  [address-service] d.l.a.service.AddressService - Getting Address Details from AddressRepo
+22:58:42 PM INFO  [address-service] d.l.a.service.AddressService - Received Address Details from AddressRepo : AddressResponse{id=1, city='Bengaluru', state='Karnataka'}
+22:58:42 PM INFO  [address-service] d.l.a.controller.AddressController - Returning addressResponse from AddressController : <200 OK OK,AddressResponse{id=1, city='Bengaluru', state='Karnataka'},[]> 
+```
+### employee-service 
+```log
+22:58:42 PM DEBUG [employee-service] d.l.e.client.AddressClient - [AddressClient#getAddressByEmployeeId] <--- HTTP/1.1 200 (351ms)
+22:58:42 PM INFO  [employee-service] d.l.e.service.EmployeeService - Received employee address from address-service : AddressResponse{id=1, city='Bengaluru', state='Karnataka'}
+22:58:42 PM INFO  [employee-service] d.l.e.service.EmployeeService - Aggregating Address response to Employee Response and sending the response to Employee Control Layer : EmployeeResponse{id=1, name='Amiya', email='amiya@email.com', age='25', addressResponse=AddressResponse{id=1, city='Bengaluru', state='Karnataka'}}
+22:58:42 PM INFO  [employee-service] d.l.e.controller.EmployeeController - Received response from EmployeeService: EmployeeResponse{id=1, name='Amiya', email='amiya@email.com', age='25', addressResponse=AddressResponse{id=1, city='Bengaluru', state='Karnataka'}}
+22:58:42 PM INFO  [employee-service] d.l.e.controller.EmployeeController - Returning Http response from Employee Controller : <200 OK OK,EmployeeResponse{id=1, name='Amiya', email='amiya@email.com', age='25', addressResponse=AddressResponse{id=1, city='Bengaluru', state='Karnataka'}},[]>
+```
+
+
